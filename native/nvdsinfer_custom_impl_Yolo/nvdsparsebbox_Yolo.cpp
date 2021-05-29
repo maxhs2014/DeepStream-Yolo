@@ -137,7 +137,7 @@ static void writeDetectionToFile(const NvDsInferParseObjectInfo bbi) {;
     
     fstream predictions;
     predictions.open("predictions.txt");
-    predictions << bbi.classId << ";" << string(bbi.detectionConfidence) << ";" << string(bbi.left) << ";" << string(bbi.width) << ";" << string(bbi.top) << ";" << string(bbi.height);
+    predictions << bbi.classId << ";" << bbi.detectionConfidence << ";" << bbi.left << ";" << bbi.width << ";" << bbi.top << ";" << bbi.height;
     predictions.close();
 }
 
