@@ -131,6 +131,14 @@ static NvDsInferParseObjectInfo convertBBox(const float& bx, const float& by, co
     return b;
 }
 
+static void writeDetectionToFile(const NvDsInferParseObjectInfo bbi) {;
+    
+    ofstream predictions;
+    predictions.open("predictions.txt")
+    predictions << bbi.classId << ";" << string(bbi.detectionConfidence) << ";" << string(bbi.left) << ";" << string(bbi.width) << ";" << string(bbi.top) << ";" << string(bbi.height);
+    predictions.close()
+}
+
 static void addBBoxProposal(const float bx, const float by, const float bw, const float bh,
                      const uint stride, const uint& netW, const uint& netH, const int maxIndex,
                      const float maxProb, std::vector<NvDsInferParseObjectInfo>& binfo)
@@ -144,13 +152,7 @@ static void addBBoxProposal(const float bx, const float by, const float bw, cons
     binfo.push_back(bbi);
 }
 
-static void writeDetectionToFile(const NvDsInferParseObjectInfo bbi) {;
-    
-    ofstream predictions;
-    predictions.open("predictions.txt")
-    predictions << bbi.classId << ";" << string(bbi.detectionConfidence) << ";" << string(bbi.left) << ";" << string(bbi.width) << ";" << string(bbi.top) << ";" << string(bbi.height);
-    predictions.close()
-}
+
 
 static std::vector<NvDsInferParseObjectInfo>
 decodeYoloTensor(
