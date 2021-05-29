@@ -136,9 +136,9 @@ static NvDsInferParseObjectInfo convertBBox(const float& bx, const float& by, co
 static void writeDetectionToFile(const NvDsInferParseObjectInfo bbi) {;
     
     fstream predictions;
-    predictions.open("predictions.txt")
+    predictions.open("predictions.txt");
     predictions << bbi.classId << ";" << string(bbi.detectionConfidence) << ";" << string(bbi.left) << ";" << string(bbi.width) << ";" << string(bbi.top) << ";" << string(bbi.height);
-    predictions.close()
+    predictions.close();
 }
 
 static void addBBoxProposal(const float bx, const float by, const float bw, const float bh,
