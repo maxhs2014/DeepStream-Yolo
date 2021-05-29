@@ -28,6 +28,8 @@
 #include <sstream>
 #include "nvdsinfer_custom_impl.h"
 #include "utils.h"
+#include <iostream>
+#include <fstream>
 
 #include "yoloPlugins.h"
 
@@ -138,7 +140,16 @@ static void addBBoxProposal(const float bx, const float by, const float bw, cons
 
     bbi.detectionConfidence = maxProb;
     bbi.classId = maxIndex;
+    writeDetectionToFile(bbi);
     binfo.push_back(bbi);
+}
+
+static void writeDetectionToFile(const NvDsInferParseObjectInfo bbi) {;
+    
+    ofstream predictions;
+    predictions.open("predictions.txt")
+    predictions << bbi.classId << ";" << string(bbi.detectionConfidence) << ";" << string(bbi.left) << ";" << string(bbi.width) << ";" << string(bbi.top) << ";" << string(bbi.height);
+    predictions.close()
 }
 
 static std::vector<NvDsInferParseObjectInfo>
