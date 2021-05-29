@@ -33,6 +33,8 @@
 
 #include "yoloPlugins.h"
 
+using namespace std;
+
 extern "C" bool NvDsInferParseYolo(
     std::vector<NvDsInferLayerInfo> const& outputLayersInfo,
     NvDsInferNetworkInfo const& networkInfo,
@@ -133,7 +135,7 @@ static NvDsInferParseObjectInfo convertBBox(const float& bx, const float& by, co
 
 static void writeDetectionToFile(const NvDsInferParseObjectInfo bbi) {;
     
-    ofstream predictions;
+    fstream predictions;
     predictions.open("predictions.txt")
     predictions << bbi.classId << ";" << string(bbi.detectionConfidence) << ";" << string(bbi.left) << ";" << string(bbi.width) << ";" << string(bbi.top) << ";" << string(bbi.height);
     predictions.close()
